@@ -62,7 +62,7 @@ class AdminEvent(Event):
 
 
 	def __str__(self):
-		return "Type: %s, Instrument: %s (
+		return "Type: %s, Instrument: %s" (
 			str(self.type), str(self.instrument))
 
 	def __repr__(self):
