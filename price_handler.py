@@ -2,7 +2,7 @@
 from event import event
 from downloader import DownloadMgr
 import pandas as pd
-from threading import Thread, Event
+from threading import Thread
 
 class HistoricalPriceHandler(Thread):
 	def __init__(self, pair, start_date, end_date, queue, wait):
@@ -18,14 +18,20 @@ class HistoricalPriceHandler(Thread):
 	def run(self):	
 		while True:
 			files = self.dmgr.download_historical_data(self.pair, self.start_date, self.end_date)
-			print files
+			strat_date_ts = pd.Timestamp(self.start_date)
+			end_date_ts = pd.Timestamp(self.end_date)
 			for file in files:
 				df = pd.read_pickle(file)
 				for index, row in df.iterrows():
-					ev = event.TickEvent(self.pair, index, row[0], row[1])
-					self.queue.put(ev)
-					self.wait_ev.set()
-					self.wait_ev.wait()
+					if index >= strat_date_ts and index <= end_date_ts:
+						ev = event.TickEvent(self.pair, index, row[0], row[1])
+						self.wait_ev.acquire()
+						self.queue.put(ev)
+					else:
+						if index > end_date_ts:
+							break
+						else:
+							continue		
 			ev = event.AdminEvent("Done", self.pair)
 			self.queue.put(ev)
-			
+			break;
