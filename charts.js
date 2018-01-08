@@ -3,12 +3,13 @@ var fs = require('fs');
 var io = require('socket.io');
 var url = require('url');
 var  net = require('net');
-//server to recieve OHLC data 
-var STREAM_PORT = 6969
+var spawn = require('child_process').spawn
+//server to receive OHLC data 
+var STREAM_PORT = 9000
 
 
-var stream = net.createServer();
-stream.listen(STREAM_PORT);
+//var stream = net.createServer();
+//stream.listen(STREAM_PORT);
 
 
 var server = http.createServer(function(req, res){	
@@ -24,7 +25,7 @@ var server = http.createServer(function(req, res){
 			fs.readFile(__dirname + path, function(error, data){
 				if(error){
 					res.writeHead(404);
-					res.write("opps this doesn't exist - 404");
+					res.write("oops this doesn't exist - 404");
 					res.end();
 				}
 				else
@@ -38,7 +39,7 @@ var server = http.createServer(function(req, res){
 		default:
 		
 			res.writeHead(404);
-			res.write("opps this doesn't exist - 404");
+			res.write("oops this doesn't exist - 404");
 			res.end();
 		break;		
 	}
@@ -48,28 +49,29 @@ server.listen(8080);
 
 var listner = io.listen(server);
 //
-listner.sockets.on('connection', function(socket){
-	socket.emit('message', { 'message':'hello world'});
-});
-
-
-console.log('Server listening on ' + server.address().address +':'+ server.address().port);
-server.on('connection', function(sock) {
-	
-	console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
-	// other stuff is the same from here
-	// Add a 'data' event handler to this instance of socket
-	sock.on('data', function(data) {
-		
-		console.log('DATA ' + sock.remoteAddress + ': ' + data);		
+listner.on('connection', function(socket){
+    socket.on('start_bt', function (msg) {
+        console.log('Message Received: ', msg);
 	});
-	
-	// Add a 'close' event handler to this instance of socket
-	sock.on('close', function(data) {
-		console.log('CLOSED: ' + sock.remoteAddress +' '+ sock.remotePort);
-	})	
 });
 
+
+
+//server.on('connection', function(sock) {
+//	
+//	console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
+//	// other stuff is the same from here
+//	// Add a 'data' event handler to this instance of socket
+//	sock.on('start_bt', function(data) {
+//		console.log('DATA : ' + data);		
+//	});
+//	
+//	// Add a 'close' event handler to this instance of socket
+//	sock.on('close', function(data) {
+//		console.log('CLOSED: ' + sock.remoteAddress +' '+ sock.remotePort);
+//	})	
+//});
+//
 
 
 

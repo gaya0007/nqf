@@ -8,12 +8,6 @@
     text {
         fill: #000;
     }
-    button {
-        position: absolute;
-        right: 20px;
-        top: 440px;
-        display: none;
-    }
     path.candle {
         stroke: #000000;
     }
@@ -30,17 +24,25 @@
     }
 </style>
 <body>
-<button>Update</button>
 <script src="http://d3js.org/d3.v4.min.js"></script>
 <script src="http://techanjs.org/techan.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script>
 
+<p>Start Date</p>
+<input id='start_date' type='date'>
+<p>End Date</p>
+<input id='end_date' type='date'>
+<br>
+<br>
+<button type="button" onclick="run_backtest()">Run Backtest</button>
+
+<script>
 	var socket = io.connect();
 	
-	socket.on('message', function(data){
-    console.log(data.message);
-});
-
+	function run_backtest(){
+		var start_date = document.getElementById("start_date").value.replace(/-/g,'/');
+		var end_date = document.getElementById("end_date").value.replace(/-/g,'/');
+		socket.emit('start_bt',{st:start_date, end:end_date});
+	}
 </script>
 

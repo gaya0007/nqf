@@ -6,7 +6,7 @@ import socket
 import sys
 import json
 
-HOST, PORT = "127.0.0.1", 6969
+HOST, PORT = "127.0.0.1", 9000
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
