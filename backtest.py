@@ -1,14 +1,20 @@
 from datetime  import date, datetime
 from Queue import Queue
 from price_handler import HistoricalPriceHandler
-from threading import Thread, Lock
+from threading import Thread
 import socket
 import sys
 import json
+import io
 
-HOST, PORT = "127.0.0.1", 9000
+def bt_print(data):
+	print data
+	sys.stdout.flush()
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+def read_in():
+    lines = sys.stdin.readlines()
+    #Since our input would only be having one line, parse our JSON data from that
+    return json.loads(lines[0])
 
 def run_bt(start, end):
 	queue = Queue()
@@ -16,23 +22,29 @@ def run_bt(start, end):
 	end_date = (datetime.strptime(end, '%d/%m/%Y')).date()
 	print "start {}".format(strt_date)
 	print "end {}".format(end_date)
-	cv = Lock()
-	phd = HistoricalPriceHandler('EUR_USD', strt_date, end_date, queue, cv)
-	phd.start()
-	sock.connect((HOST, PORT))
+	phd = HistoricalPriceHandler('EUR_USD', strt_date, end_date, queue)
+	phd.stream()
+	
 	
 	while True:
 		obj = queue.get()
 		if obj.type == 'Done':
 			break
 		else:
-			sock.sendall(str(obj))
-		cv.release()	
+			bt_print(obj)
+
 		
 	phd.join()	
-	sock.close()
+
 	
 	
-if __name__ == '__main__':
-	print "arguments " + sys.argv[1]
-	run_bt(sys.argv[1], sys.argv[2])
+if __name__ == '__main__':	
+	while True:
+		#input = read_in();
+		input = "{u'msg': u'start_bt', u'start': u'2017/11/15', u'end': u'2017/11/15'}"
+		d = json.loads(input)
+		bt_print(d['msg'])
+
+		bt_print(d)
+		#if d.msg == 'start_bt':
+		#	run_bt(d.start, d.end)

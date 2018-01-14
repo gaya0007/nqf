@@ -2,15 +2,14 @@ var http = require('http');
 var fs = require('fs');
 var io = require('socket.io');
 var url = require('url');
-var  net = require('net');
 var spawn = require('child_process').spawn
-//server to receive OHLC data 
-var STREAM_PORT = 9000
+//server to recieve OHLC data 
 
+var bt = spawn('python',["backtest.py"]);
 
-//var stream = net.createServer();
-//stream.listen(STREAM_PORT);
-
+bt.stdout.on('data',function(data){
+	console.log("data :" + data);
+});
 
 var server = http.createServer(function(req, res){	
 	var path = url.parse(req.url).pathname;
@@ -25,7 +24,7 @@ var server = http.createServer(function(req, res){
 			fs.readFile(__dirname + path, function(error, data){
 				if(error){
 					res.writeHead(404);
-					res.write("oops this doesn't exist - 404");
+					res.write("opps this doesn't exist - 404");
 					res.end();
 				}
 				else
@@ -49,29 +48,14 @@ server.listen(8080);
 
 var listner = io.listen(server);
 //
-listner.on('connection', function(socket){
+
+listner.on('connection', function (socket) {
     socket.on('start_bt', function (msg) {
         console.log('Message Received: ', msg);
-	});
+		bt.stdin.write(JSON.stringify(msg));
+		bt.stdin.end();
+    });
 });
-
-
-
-//server.on('connection', function(sock) {
-//	
-//	console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
-//	// other stuff is the same from here
-//	// Add a 'data' event handler to this instance of socket
-//	sock.on('start_bt', function(data) {
-//		console.log('DATA : ' + data);		
-//	});
-//	
-//	// Add a 'close' event handler to this instance of socket
-//	sock.on('close', function(data) {
-//		console.log('CLOSED: ' + sock.remoteAddress +' '+ sock.remotePort);
-//	})	
-//});
-//
 
 
 

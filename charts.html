@@ -1,33 +1,12 @@
 <!DOCTYPE html>
 
 <meta charset="utf-8">
-<style>
-    body {
-        font: 10px sans-serif;
-    }
-    text {
-        fill: #000;
-    }
-    path.candle {
-        stroke: #000000;
-    }
-    path.candle.body {
-        stroke-width: 0;
-    }
-    path.candle.up {
-        fill: #00AA00;
-        stroke: #00AA00;
-    }
-    path.candle.down {
-        fill: #FF0000;
-        stroke: #FF0000;
-    }
-</style>
-<body>
-<script src="http://d3js.org/d3.v4.min.js"></script>
-<script src="http://techanjs.org/techan.min.js"></script>
+<head>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-
+</head>
+<body>
 <p>Start Date</p>
 <input id='start_date' type='date'>
 <p>End Date</p>
@@ -36,13 +15,15 @@
 <br>
 <button type="button" onclick="run_backtest()">Run Backtest</button>
 
+<div id="container" style="height: 400px; min-width: 310px"></div>
+
 <script>
 	var socket = io.connect();
 	
 	function run_backtest(){
 		var start_date = document.getElementById("start_date").value.replace(/-/g,'/');
 		var end_date = document.getElementById("end_date").value.replace(/-/g,'/');
-		socket.emit('start_bt',{st:start_date, end:end_date});
+		socket.emit('start_bt',{msg:'start_bt', start:start_date, end:end_date});
 	}
 </script>
 

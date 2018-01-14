@@ -5,15 +5,16 @@ import pandas as pd
 from threading import Thread
 
 class HistoricalPriceHandler(Thread):
-	def __init__(self, pair, start_date, end_date, queue, wait):
+	def __init__(self, pair, start_date, end_date, queue):
 		Thread.__init__(self)
 		self.queue = queue
-		self.wait_ev = wait
 		self.start_date = start_date
 		self.end_date = end_date
 		self.pair = pair
 		self.dmgr = DownloadMgr()
 
+	def stream(self):
+		self.start()
 		
 	def run(self):	
 		while True:
@@ -25,7 +26,6 @@ class HistoricalPriceHandler(Thread):
 				for index, row in df.iterrows():
 					if index >= strat_date_ts and index <= end_date_ts:
 						ev = event.TickEvent(self.pair, index, row[0], row[1])
-						self.wait_ev.acquire()
 						self.queue.put(ev)
 					else:
 						if index > end_date_ts:
