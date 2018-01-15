@@ -6,10 +6,8 @@ import socket
 import sys
 import json
 import io
+from util import node_send_event
 
-def bt_print(data):
-	print data
-	sys.stdout.flush()
 
 def read_in():
     lines = sys.stdin.readlines()
@@ -17,34 +15,19 @@ def read_in():
     return json.loads(lines[0])
 
 def run_bt(start, end):
-	queue = Queue()
-	strt_date = (datetime.strptime(start, '%d/%m/%Y')).date()
-	end_date = (datetime.strptime(end, '%d/%m/%Y')).date()
-	print "start {}".format(strt_date)
-	print "end {}".format(end_date)
-	phd = HistoricalPriceHandler('EUR_USD', strt_date, end_date, queue)
-	phd.stream()
-	
-	
-	while True:
-		obj = queue.get()
-		if obj.type == 'Done':
-			break
-		else:
-			bt_print(obj)
+	strt_date = (datetime.strptime(start, '%Y/%m/%d')).date()
+	end_date = (datetime.strptime(end, '%Y/%m/%d')).date()
+	phd = HistoricalPriceHandler('EUR_USD', strt_date, end_date)
+	phd.stream_df()
 
-		
-	phd.join()	
 
 	
 	
 if __name__ == '__main__':	
 	while True:
-		#input = read_in();
-		input = "{u'msg': u'start_bt', u'start': u'2017/11/15', u'end': u'2017/11/15'}"
-		d = json.loads(input)
-		bt_print(d['msg'])
-
-		bt_print(d)
-		#if d.msg == 'start_bt':
-		#	run_bt(d.start, d.end)
+		d = read_in()
+		#str = '{ "msg": "start_bt", "start": "2017/11/09", "end": "2017/11/09" }'
+		#d = json.loads(str)
+		if d['msg'] == 'start_bt':
+			node_send_event("start")
+			run_bt(d['start'], d['end'])
