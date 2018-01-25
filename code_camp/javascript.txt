@@ -1,0 +1,62 @@
+[Comments]
+// - Single line comment
+/* */ - multi line comment
+
+[Data types]
+undefined, null, boolean, string, symbol, number, object
+
+[Variable]
+var name;
+When var are declared they have initial value of undefined.
+arithmetic on undefined var result wil be NaN - not a number.
+string concatenation of undefined var will result in string "undefined"
+Best practice - variable names have the first word in lower-case and the first letter of each subsequent word is capitalized.
+Variables which are used without the var keyword are automatically created in the global scope.
+
+[Arithmatic Opr]
++, -, *, /, ++, --, %, +=, -=, *=, /=
+
+[Logical Opr]
+Equal ==,    1   ==  1    // true
+   1   ==  2    // false
+   1   == '1'   // true
+  "3"  ==  3    // true
+ JS converts and compares the values. 
+ 
+ Strictly Equal ===,
+ 3 === 3   // true
+3 === '3' // false
+
+Inequality != 
+Strict Inequality !==
+
+[Strings]
+escape character to use for conflicting syntax. ex var myVar = "String in \"Double Quote\".";
+single quote can replace the double quote strings and vice versa. ex var myVar = 'String in "Double Quote".';
+Strings can be concatenated using + operator or +=.
+.length property counts the number of characters in string.
+Indexing can give the letters of a string. ex var myVay = "Test"; myVar[0]
+String values are immutable, individual characters of a string literal cannot be changed.
+
+[Arrays]
+Array decl starts and closes with '[' ']'. ex- var sandwich = ["peanut butter", "jam"];
+Multi dimensional arrays are possible. [["Bulls", 23], ["White Sox", 45]]
+Indexing can give the elements of the array.
+Arrays are mutable and changed using index.
+Append data to the end of the array with .push() method. 
+.pop() will remove an element from the end of the array.
+.shift() will remove the first element of the array.
+.push() adds an element at the end of the array.
+.unshift() adds an element at the beginning of the array.
+
+[Functions]
+function functionName(parameter1, parameter2){opr;}
+Variable within functions ahce local scope.
+Possible to have local and global variable the same name. in local scope local var always precede the global.
+
+[IF /ELSE]
+if(){}else()
+
+[SWITCH]
+case values are tested with strict equality (===)
+switch(num){case x: break; default :break;}

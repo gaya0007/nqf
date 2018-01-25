@@ -1,0 +1,161 @@
+The <!DOCTYPE html> declaration defines this document to be HTML5
+
+The <head> element contains meta information about the document.
+
+The <title> element specifies a title for the document.
+
+The <body> element contains the visible page content.
+
+{--Headings--}
+
+<h>heading text</h>
+<h1>heading text</h1>
+<h2>heading text</h2>
+<h3>heading text</h3>
+<h4>heading text</h4>
+<h5>heading text</h5>
+<h6>heading text</h6>
+
+{--PARAGRAPHS--}
+<p>paragraph text</p>
+
+{--COMMENT--}
+<!-- commented  -->
+
+{--INLINE (STYLING)--}
+<h2 style="color:red"> text </h2>
+
+{--CSS--}
+<style>
+h2{
+	color:red;
+}
+</style>
+<h2> text </h2> <!-- This displays in red colour -->
+
+{--CSS class--}
+<style>
+.red_text{
+	color:red;
+}
+</style>
+<h2 class="red_text"> text </h2> <!-- This displays in red colour -->
+
+{CSS PROPERTIES}
+color:red;  -- can use a 6 digit hex number for RGB 2 dig each color ex - color : #000000 or shorten #000 1 dig each
+			-- or rgb(255, 255, 255)
+font-size:30px;
+font-family:Sans-serif;
+font-family: Helvetica, Sans-Serif; <!-- degrading if first not available -->
+width: 500px; <!-- Controls an element's width -->
+--boaders--
+border-color:red;
+border-wdth:5px;
+border-style: solid;
+border-radius: 10px; - smooth out the sharp corners of the border , can use a % instead of pixels.
+padding:5px; -- COntrols the amount of space between the element and its border.
+			 -- padding-top, padding-right, padding-bottom, padding-left
+			 -- padding: 10px 20px 10px 20px; Works like a clock.
+margin: 5px;  --Controls the amount of space between an element's border and surrounding elements.
+			--Set margin to negative, the element will grow lager.
+			-- margin: 10px 20px 10px 20px; works like a clock.
+
+
+[Adding Images]
+<img src="Path to Image"> <!-- img tag is self closing-->
+<img src="path to img" alt="desc">  <!-- text inside an alt is used for improve accessibility and is displayed if the image fails to load. -->
+
+image size can be controlled by width css
+<style>
+ .lager-image{
+	width: 500px;
+ }
+</style>
+
+[Anchor tags]
+<a href="path">Anchor Text</a>
+a elements can be nested.
+href="#" <!-- "#" value sets the reference to dead link -->
+
+{Un ordered lists}
+Unordered lists start with a <ul> element. Then they contain some number of <li> elements.
+<ul>
+  <li>milk</li>
+  <li>cheese</li>
+</ul>
+
+{Ordered lists}
+Unordered lists start with a <ul> element. Then they contain some number of <li> elements.
+<ol>
+  <li>milk</li>
+  <li>cheese</li>
+</ol>
+
+{Text Fields}
+<input type="text"> //input elements are self closing
+placeholder -- placeholder text is what appears in text input before user enter anything
+<input type="text" placeholder="Place holder text.">
+<input type="text" placeholder="Place holder text." required>
+required attribute makes the field compulsory 
+
+[Form Element]
+web form that submit data to server 
+<form action="url"></form>
+
+[Button]
+<button type="submit">BUtton Text</button>
+
+[Radio Buttons]
+Radio button are a type of input
+They should be nested within <label> tags
+All related radio button should have the same name attribute
+<label><input type="radio" name="my radio">label name1</label>
+<label><input type="radio" name="my radio" checked>label name2</label>
+checked attribute sets the default checked value.
+
+[Check Boxes]
+Check boxes are a type of input
+They should be nested within <label> tags
+All related check boxes should have the same name attribute
+<label><input type="checkbox" name="my checkbox">label name1</label>
+<label><input type="checkbox" name="my checkbox" checked>label name2</label>
+checked attribute sets the default checked value.
+
+[DIV Element]
+general purpose container.
+Able to nest as many elements and give them a common CSS.
+
+[ID Attribute]
+Gives an ID to elements, id id to be use in JQUERY 
+in style deceleration, id can be used using 
+<style>
+	#idname{
+		background-colour:color;
+	}
+</style>	
+
+this will override any other style attribute the element has.
+<style>
+	#idname{
+		background-colour:color;
+	}
+	.mcolr{
+		color:color;
+	}
+</style>
+<h1 class="mcolr" id="myid"> Head Text</h1>
+
+[CSS Class overriding]
+The order of the class deceleration. define the style precedence of the element  
+"!important" Keyword overrides all the CSS decelerations
+<style>
+	.text{
+		color:blue !importnat;
+	}
+</stlye>
+<h1 style="color:red" class="text"> Head Text </h1>
+
+[Span Tag]
+Span can create in-line elements. 
+By using span element, its possible to put few elements together and style them separately.
+<p>Top 3 things cats <span class = "text-danger">hate:</span></p>

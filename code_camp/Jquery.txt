@@ -1,0 +1,66 @@
+[Document Ready]
+Without the document ready function, script may execute before loading the html elements, which might cause bugs.
+<script> $(document).ready(function(){});</script>.
+
+[Target HTML elements with JQUERY]
+$ - All JQUERY functions start with $
+jQuery often selects an HTML element with a selector
+$("button").addClass("animated bounce"); - adds the css class "animated bounce"
+JQUERY able to target by elements by type. $("button")
+JQUERY able to target by elements css class. $(".btn")
+JQUERY able to target by elements id. need to use '#' for id. $("#target1")
+
+[Adding css classes]
+.addClass()
+
+[Removing CSS classes]
+.removeClass()
+
+[Changing CSS Directly]
+.css() allows to change the CSS of the element directly.
+$("#target1").css("color", "blue");
+
+[Changing non CSS Property]
+.prop() - allows to adjust the element property.
+$("button").prop("disabled", true);
+
+[Adding HTML ELEMENTS]
+.html() let you add HTML tags and text.
+$("#target2").html("<em>#target4</em>");
+
+[Removing HTML ELEMENTS]
+.remove() , removes the html elements entirely.
+$("#target2").remove();
+
+[Change Text Inside]
+.text() let you only alter the text.
+
+[Move elements]
+appendTo() that allows you to select HTML elements and append them to another element.
+$("#target4").appendTo("#left-well");
+
+[Clone Elements]
+$("#target2").clone().appendTo(#right-well);
+
+[Target Parent of Element]
+.parent() allows to access the element that is selected
+<div class="container-fluid">
+	<h3 id="head">Text</h3>
+</div>
+$("#head").parent().css("color", "blue");
+
+[Target Children Elements]
+children() ,allows you to access the children of whichever element you've selected.
+<div id="main" class="container-fluid">
+	<h3 id="head">Text</h3>
+</div>
+$("#main").children().css("color", "blue");
+
+[Target Specific Child of an Element]
+target:nth-child(n) css selector allows you to select all the nth elements with the target class or element type.
+$(".target:nth-child(3)").addClass("animated bounce");
+$(".target:odd").addClass("animated shake");
+$(".target:even").addClass("animated shake");
+
+[Target Body]
+$("body").

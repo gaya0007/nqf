@@ -1,0 +1,41 @@
+[Bootstrap]
+Bootstrap is a front end framework.
+Bootstrap will figure out how wide your screen is and respond by resizing your HTML elements.
+add Bootstrap to any app by adding <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+Nest all html elements in div element with class container-fluid for responsive elements for smaller screen. 
+
+[Images]
+img-responsive class fit to the screen.
+<img src="sorce link" img-responsive>
+
+[Text]
+Centering text <h2 class="red-text text-center">your text</h2>
+
+[Button]
+Nicer look than html button, give the class 'btn'. 
+'btn' class button will only be wider as it's text.  additional class of btn-block will stretch the button to entire page. buttons still need the btn class.
+'btn-primary' class highlights the button color and user action. button still need the btn class.
+'btn-info' class highlights optional button color and characteristics.
+'btn-danger' class highlights warning button color and characteristics.
+'btn-default' class for default style.
+
+[Bootstrap Grid System] 
+Most of Bootstrap's classes can be applied to a div element.
+Bootstrap has responsive grid system, easy to put elements into raw's and specify width.
+12 column grid system, css .col-md-x.  md:medium for laptop screen,  x - column width.
++--+--+--+--+--+--+--+--+--+--+--+--+
+| 1| 2| 3| 4| 5| 6| 7| 8| 9|10|11|12| 
++--+--+--+--+--+--+--+--+--+--+--+--+
+col-xs-x.  xs:small for phone screen,  x - column width
+The 'row' class is applied to a div, and the elements can be nested within one row.
+
+[Font Awesome]
+Font Awesome is a library of icons in .svg.
+Add Font Awesome <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+<i class="fa fa-info-circle"></i>
+<i class="fa fa-thumbs-up"></i>
+<i class="fa fa-trash"></i>
+<i class="fa fa-paper-plane"></i>
+
+[Well]
+well can create visual sense of depth for columns.
